@@ -26,18 +26,18 @@ monthFormat: "2006-01"
 dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
-author: D-Sketon
-email: xxx@example.com
-description: "少女祈祷中..."
+author: Ounigulog
+email: 2144253736@qq.com
+description: "泪水打湿猪脚饭。。。"
 # subtitle: "少女祈祷中..."
 subtitle:
   typing:
-    enable: false
+    enable: true
     strings:
-      # - Sentence 1
-      # - Sentence 2
-      # - Sentence 3
-      # - Sentence 4
+       - 本是清汤无盐面，泪落碗中方知咸
+       - 233
+       - 呃呃
+       - 如此这般
     typeSpeed: 100              # 打字速度（毫秒/字符） 
     backSpeed: 50               # 删除速度（毫秒/字符）
     backDelay: 2000             # 打完一句话后，等待时间
@@ -64,7 +64,7 @@ banner_srcset:
     - src: "images/banner.webp"
       media: "(min-width: 800px)"
 
-avatar: "avatar.webp"
+avatar: "sln.jpg"
 
 # Control the display of the post cover
 # If not set, the banner image will be displayed by default
@@ -102,7 +102,7 @@ copyright:
 #   All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
 
 footer:
-  since: 2020 # 2020-current year
+  since: 2026 # 2020-current year
   powered: true
   count: true
   busuanzi: true
@@ -120,8 +120,8 @@ sidebar:
     show_common: true # whether to show common sidebar, ignored on mobile devices
 
 social:
-  # email: mailto:xxx@gmail.com
-  # github: https://github.com/yourname
+   email: 2144253736@qq.com
+   github: https://github.com/ounigulog
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
   # bluesky: https://bsky.app/profile/yourname
@@ -195,8 +195,8 @@ sort_order:
 
 # Pagination
 paginate:
-  archive: # Number of posts per page in archive and taxonomy pages
-  post: # Number of posts per page in home and other list pages
+  archive: 15 # Number of posts per page in archive and taxonomy pages
+  post: 10 # Number of posts per page in home and other list pages
 
 ########################################
 # CSS
@@ -206,9 +206,9 @@ layout:
   max_width: 1350px # the max width of the main content area
 
 triangle_badge:
-  enable: false
+  enable: true
   icon: github # same as the icon in the social config
-  link: https://github.com/D-Sketon/hugo-theme-reimu
+  link: https://github.com/ounigulog
 
 anchor_icon: # default use '#' icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1', you can also use false to hide anchor icon
 
@@ -580,7 +580,7 @@ top:
 
 # whether to display the notification when the article is outdated
 outdate:
-  enable: false
+  enable: true
   daysAgo: 180 # The number of days after which the article is considered outdated
   message:
     en: This article was last updated on {time}. Please note that the content may no longer be applicable.
