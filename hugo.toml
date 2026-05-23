@@ -11,21 +11,21 @@ hasCJKLanguage = 'true'
 title = 'Ounigulog'
 author = 'Ounigulog'
 
-[languages.en]
-locale = 'en'
-label = 'English'
-weight = 2
-hasCJKLanguage = 'true'
-title = 'Ounigulog'
-author = 'Ounigulog'
+# [languages.en]
+# locale = 'en'
+# label = 'English'
+# weight = 2
+# hasCJKLanguage = 'true'
+# title = 'Ounigulog'
+# author = 'Ounigulog'
 
-[languages.ja]
-locale = 'ja'
-label = '日本語'
-weight = 3
-hasCJKLanguage = 'true'
-title = 'Ounigulog'                                      # 自己编辑
-author = 'Ounigulog'                                     # 自己编辑
+# [languages.ja]
+# locale = 'ja'
+# label = '日本語'
+# weight = 3
+# hasCJKLanguage = 'true'
+# title = 'Ounigulog'                                      # 自己编辑
+# author = 'Ounigulog'                                     # 自己编辑
 
 [markup.highlight]
 guessSyntax = 'true'
