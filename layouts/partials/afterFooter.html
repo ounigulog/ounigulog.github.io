@@ -287,13 +287,15 @@
       {{- end -}}
     {{- end -}}
     {{- if and .IsHome (reflect.IsMap .Site.Params.subtitle) .Site.Params.subtitle.typing.enable -}}
-      {{- partial "helpers/cdnJs.html" (dict "name" "typed" "ctx" . "defer" true "onload" "initSubtitleTyping") -}}
+      {{- $line1 := .Site.Params.subtitle.typing.strings.line1 -}}
+      {{- $line2 := .Site.Params.subtitle.typing.strings.line2 -}}
+      {{- partial "helpers/cdnJs.html" (dict "name" "typed" "ctx" . "defer" true) -}}
       <script data-pjax>
         window.subtitleTypingConfig = {
-          strings: [
-            {{- range $index, $string := .Site.Params.subtitle.typing.strings -}}
-              {{- if $index -}},{{- end -}}
-              "{{ $string }}"
+          pairs: [
+            {{- range $i, $_ := $line1 -}}
+              {{- if $i -}},{{- end -}}
+              ["{{ index $line1 $i }}", "{{ index $line2 $i }}"]
             {{- end -}}
           ],
           typeSpeed: {{ .Site.Params.subtitle.typing.typeSpeed | default 100 }},
@@ -302,36 +304,156 @@
           startDelay: {{ .Site.Params.subtitle.typing.startDelay | default 300 }},
           loop: {{ .Site.Params.subtitle.typing.loop | default true }},
           shuffle: {{ .Site.Params.subtitle.typing.shuffle | default true }},
-          showCursor: {{ .Site.Params.subtitle.typing.showCursor | default true }},
           {{- if .Site.Params.subtitle.typing.cursorChar -}}
           cursorChar: "{{ .Site.Params.subtitle.typing.cursorChar }}",
           {{- end -}}
-          smartBackspace: {{ .Site.Params.subtitle.typing.smartBackspace | default false }}
         };
+
         function initSubtitleTyping() {
-          const subtitleElement = document.querySelector('#subtitle span');
-          if (!subtitleElement || !window.Typed || !window.subtitleTypingConfig) {
-            return;
+          var el1 = document.querySelector('#subtitle .subtitle-line1');
+          var el2 = document.querySelector('#subtitle .subtitle-line2');
+          if (!el1 || !el2 || !window.Typed || !window.subtitleTypingConfig) return;
+
+          var cfg = window.subtitleTypingConfig;
+          var pairs = cfg.shuffle ? shuffleArr(cfg.pairs.slice()) : cfg.pairs.slice();
+          var idx = 0;
+          var typed1 = null, typed2 = null, backTimer = null;
+
+          function shuffleArr(a) {
+            for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+            return a;
           }
 
-          if (window.__typedInstance) {
-            window.__typedInstance.destroy();
+          function nextPair() {
+            if (idx >= pairs.length) { pairs = cfg.shuffle ? shuffleArr(cfg.pairs.slice()) : cfg.pairs.slice(); idx = 0; }
+            return pairs[idx++];
           }
 
-          window.__typedInstance = new Typed('#subtitle span', window.subtitleTypingConfig);
+          function syncBlink() {
+            var e1 = el1.classList.contains('idle');
+            var e2 = el2.classList.contains('idle');
+            if (!e1) return;
+            el1.classList.remove('idle');
+            el2.classList.remove('idle');
+            void el1.offsetWidth;
+            if (e1) el1.classList.add('idle');
+            if (e2) el2.classList.add('idle');
+          }
+
+          function cleanup() {
+            el1.classList.remove('typing', 'idle');
+            el2.classList.remove('typing', 'idle');
+            if (typed1) { typed1.destroy(); typed1 = null; }
+            if (typed2) { typed2.destroy(); typed2 = null; }
+            if (backTimer) { clearInterval(backTimer); backTimer = null; }
+          }
+
+          function typeLine1(pair) {
+            cleanup();
+            el1.textContent = '';
+            el2.textContent = '';
+            el1.classList.add('typing');
+            var line1Text = pair[0];
+            typed1 = new Typed(el1, {
+              strings: [line1Text],
+              typeSpeed: cfg.typeSpeed,
+              backDelay: 31536000000,
+              showCursor: false,
+              loop: false,
+              onStringTyped: function(_, self) {
+                setTimeout(function() {
+                  self.destroy();
+                  el1.classList.remove('typing');
+                  el1.classList.add('idle');
+                  el1.textContent = line1Text;
+                  typed1 = null;
+                  typeLine2(pair[1]);
+                }, 0);
+              }
+            });
+          }
+
+          function typeLine2(text) {
+            el2.classList.add('typing');
+            typed2 = new Typed(el2, {
+              strings: [text],
+              typeSpeed: cfg.typeSpeed,
+              showCursor: false,
+              loop: false,
+              onStringTyped: function(_, self) {
+                setTimeout(function() {
+                  self.destroy();
+                  el2.classList.remove('typing');
+                  syncBlink();
+                  el2.classList.add('idle');
+                  el2.textContent = text;
+                  typed2 = null;
+                  setTimeout(function() {
+                    el2.classList.remove('idle');
+                    backspaceLine2();
+                  }, cfg.backDelay);
+                }, 0);
+              }
+            });
+          }
+
+          function backspaceLine2() {
+            var text = el2.textContent;
+            var len = text.length;
+            if (len === 0) { backspaceLine1(); return; }
+            el2.classList.add('typing');
+            var timer = setInterval(function() {
+              len--;
+              el2.textContent = text.substring(0, len);
+              if (len <= 0) {
+                clearInterval(timer);
+                el2.classList.remove('typing');
+                el2.textContent = '';
+                backspaceLine1();
+              }
+            }, cfg.backSpeed);
+          }
+
+          function backspaceLine1() {
+            var text = el1.textContent;
+            var len = text.length;
+            if (len === 0) { next(); return; }
+            el1.classList.remove('idle');
+            el1.classList.add('typing');
+            backTimer = setInterval(function() {
+              len--;
+              el1.textContent = text.substring(0, len);
+              if (len <= 0) {
+                clearInterval(backTimer);
+                backTimer = null;
+                el1.classList.remove('typing');
+                el1.textContent = '';
+                next();
+              }
+            }, cfg.backSpeed);
+          }
+
+          function next() {
+            el1.classList.remove('typing', 'idle');
+            el2.classList.remove('typing', 'idle');
+            setTimeout(function() { typeLine1(nextPair()); }, cfg.startDelay);
+          }
+
+          cleanup();
+          setTimeout(function() { typeLine1(nextPair()); }, cfg.startDelay);
         }
-        
+
         if (!window.__typedInitialized) {
           window.__typedInitialized = true;
-          
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initSubtitleTyping);
-          } else {
+          if (window.Typed) {
             initSubtitleTyping();
+          } else {
+            var __typedPoll = setInterval(function() {
+              if (window.Typed) { clearInterval(__typedPoll); initSubtitleTyping(); }
+            }, 50);
+            setTimeout(function() { clearInterval(__typedPoll); }, 15000);
           }
-        } else {
-          initSubtitleTyping();
-        }
+        } else { initSubtitleTyping(); }
       </script>
     {{- end -}}
   </div>

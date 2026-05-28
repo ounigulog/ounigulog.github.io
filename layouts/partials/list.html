@@ -22,7 +22,7 @@
                 class="dt-published"
                 datetime="{{ .Date }}"
                 itemprop="datePublished"
-                >{{ .Date.Format $ctx.Site.Params.monthFormat }}</time
+                >{{ .Date.Format $ctx.Site.Params.dateFormat }}</time
               >
             </span>
           </div>
@@ -59,7 +59,7 @@
                 class="dt-published"
                 datetime="{{ .Date }}"
                 itemprop="datePublished"
-                >{{ .Date.Format $ctx.Site.Params.monthFormat }}</time
+                >{{ .Date.Format $ctx.Site.Params.dateFormat }}</time
               >
             </span>
           </div>

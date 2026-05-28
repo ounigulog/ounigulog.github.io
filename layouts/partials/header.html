@@ -232,7 +232,7 @@
         {{- end -}}
         <h2 id="subtitle-wrap" data-aos="{{ .Site.Params.animation.options.header.subTitle }}">
           {{- if $useTyping -}}
-            <span id="subtitle"><span></span></span>
+            <span id="subtitle"><span class="subtitle-line1"></span><span class="subtitle-line2"></span></span>
           {{- else if $subtitle -}}
             <span id="subtitle">{{ $subtitle }}</span>
           {{- end -}}
