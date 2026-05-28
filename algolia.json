@@ -1,0 +1,7 @@
+[
+  {
+    "objectID": "80f573f51f6a96ebc04c0645cd8dd0e726c8e3e3",
+    "permalink": "/post/git%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/",
+    "title": "GIT","content": " 参考网页 首先总结一下参考过的网站：\nLearn Git Branching 有简中翻译\n讲的比较基础，动画做得很好，简明易懂。\ntab键可以补全代码\n还有自创命令来模拟团队合作\n高级例题也很有挑战性，可能符合现实项目\n但是引导做的不好，有一些命令是藏着掖着的，况且演示动画跳得很快\nLearn Git Branching https://learngitbranching.js.org/?locale=zh_CN Interactive Git Playground 纯英文\n纯手打，没有tab键，在网页模拟终端进行模拟\n在开头有引导，用一段话告诉你目前需要什么指令\n同样有动画，效果很好\n打错命令会有提示\nInteractive Git Playground https://developwithmi.com/labs/git/ 个人项目git管理 核心原则是：主分支 main 始终保持稳定可发布，所有实验性修改都在新分支上进行，不论验证成功或失败，都不删除已创建的分支。\n保留开发历史，又能随时回退。\n1. 初始化（Git 跟踪项目）并配置 .gitignore 首先进入项目根目录，初始化本地仓库：\ngit init 此时会生成隐藏文件夹 .git，Git 开始跟踪文件变化。\n重要：在首次 git add 之前，必须配置 .gitignore 文件，告诉 Git 忽略那些不需要版本控制的文件（如编译产物、依赖目录、操作系统临时文件等），避免它们被误提交。\n创建并编写 .gitignore：\n# 在项目根目录创建 .gitignore 文件 touch .gitignore 然后用任意编辑器打开 .gitignore，按行写入忽略规则，例如：\n# 依赖目录 node_modules/ vendor/ # 编译输出 build/ dist/ *.o *.class # 操作系统生成文件 .DS_Store Thumbs.db # 环境配置文件（含敏感信息） .env *.log 每行一个模式，/ 结尾表示忽略整个目录，* 是通配符。 设置完成后，可运行 git status 检查是否还有不想跟踪的文件出现在列表中，确认 .gitignore 生效。 提示：推荐在项目开始时就把 .gitignore 提交到仓库，这样其他协作者（或你在其他设备上）也能复用这些规则。\n2. …","date": "2026-05-28 00:00:00",
+    "updated": "2026-05-28 00:00:00"
+  }]

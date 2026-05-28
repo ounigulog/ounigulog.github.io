@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ounigulog</title>
+    <link>https://ounigulog.github.io/algolia.json</link>
+    <description>Recent content from Ounigulog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    
+    <managingEditor>2144253736@qq.com (Ounigulog)</managingEditor>
+    <webMaster>2144253736@qq.com (Ounigulog)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Thu, 28 May 2026 00:00:00 +0000</lastBuildDate>
+    
+    
+    <atom:link href="https://ounigulog.github.io/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>GIT</title>
+      <link>https://ounigulog.github.io/post/git%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 28 May 2026 00:00:00 &#43;0000</pubDate>
+      <author>2144253736@qq.com (Ounigulog)</author>
+      <guid>https://ounigulog.github.io/post/git%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/</guid>
+      <description>
+        <![CDATA[<h1>GIT</h1><p>作者：Ounigulog（2144253736@qq.com）</p>
+        
+          <h1 id="参考网页">
+<a class="header-anchor" href="#%e5%8f%82%e8%80%83%e7%bd%91%e9%a1%b5"></a>
+参考网页
+</h1><p>首先总结一下参考过的网站：</p>
+<h2 id="learn-git-branching">
+<a class="header-anchor" href="#learn-git-branching"></a>
+Learn Git Branching
+</h2><p>有简中翻译</p>
+<p>讲的比较基础，动画做得很好，简明易懂。</p>
+<p>tab键可以补全代码</p>
+<p>还有自创命令来模拟团队合作</p>
+<p>高级例题也很有挑战性，可能符合现实项目</p>
+        
+        <hr><p>本文2026-05-28首发于<a href='https://ounigulog.github.io/'>Ounigulog</a>，最后修改于2026-05-28</p>]]>
+      </description>
+      
+        <category>git</category><category></category>
+      
+    </item>
+    
+  </channel>
+</rss>
