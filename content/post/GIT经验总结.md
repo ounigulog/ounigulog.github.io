@@ -7,7 +7,7 @@ date: 2026-05-28
 lastmod: 2026-05-28
 
 # ── 状态 ──
-draft: false                # true=草稿，不会发布到网站
+draft: true # true=草稿，不会发布到网站
 
 # ── 分类 & 标签 ──
 categories:
