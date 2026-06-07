@@ -1,5 +1,6 @@
 ---
 title: '嵌入式C语言与STM32核心概念体系梳理'
+date: 2026-06-07
 draft: false
 categories:
   - 嵌入式STM32学习
