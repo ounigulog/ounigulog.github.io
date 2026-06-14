@@ -3,8 +3,7 @@ title: 'STM32 UART 串口通信：从轮询到 DMA 的六代进化'
 date: 2026-06-12
 draft: false
 categories:
-  - 嵌入式开发
-  - STM32
+  - 嵌入式STM32学习
 tags:
   - STM32
   - UART
